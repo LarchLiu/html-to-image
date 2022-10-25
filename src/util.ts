@@ -194,7 +194,11 @@ export function createImage(url: string): Promise<HTMLImageElement> {
 export async function svgToDataURL(svg: SVGElement): Promise<string> {
   return Promise.resolve()
     .then(() => new XMLSerializer().serializeToString(svg))
-    .then(encodeURIComponent)
+    .then((str: string) => {
+      const _str = str.replace(/--has-background-clip/g, '-webkit-background-clip')
+
+      return encodeURIComponent(_str)
+    })
     .then((html) => `data:image/svg+xml;charset=utf-8,${html}`)
 }
 

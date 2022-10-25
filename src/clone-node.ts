@@ -90,6 +90,13 @@ function cloneCSSStyle<T extends HTMLElement>(nativeNode: T, clonedNode: T) {
         value,
         sourceStyle.getPropertyPriority(name),
       )
+      if (name === 'background-clip' && value === 'text') {
+        targetStyle.setProperty(
+          '--has-background-clip',
+          value,
+          sourceStyle.getPropertyPriority(name),
+        )
+      }
     })
   }
 }
